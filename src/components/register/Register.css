@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 20px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+}
+
+.label {
+    font-size: 20px;
+}
+
+.input {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.submit {
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 18px;
+    background-color: #008cba;
+    color: white;
+    width: inherit;
+}
