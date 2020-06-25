@@ -31,3 +31,14 @@
     color: white;
     width: inherit;
 }
+
+.login-invisible {
+    display: none;
+
+}
+
+.login-visible {
+    display: block;
+    margin-top: 15px;
+    padding: 15px 0;
+}

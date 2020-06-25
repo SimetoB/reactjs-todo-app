@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Register.css';
 
 class Register extends Component{
@@ -11,8 +12,16 @@ class Register extends Component{
         if (localStorage.getItem(user)) {
             alert("This user already exists, please choose a different one.")
         } else {
-            localStorage.setItem([user], password);
-            alert(`You've successfully registered as the user ${user}`);
+
+            var data = {
+                "password": password,
+                "tasks": {}
+             };
+             
+            localStorage.setItem([user], JSON.stringify(data));
+            alert(`You've successfully registered as the user ${user}, please proceed to the login page.`);
+            document.getElementById("login").className="login-visible";
+
         }
 
         event.preventDefault();
@@ -27,6 +36,7 @@ class Register extends Component{
                     <p class="label">Password:</p>
                     <input type="password" name="password" id="password" class="input" /><br />
                     <button type="submit" class="submit" id="register">Register</button>
+                    <Link to="/login" class="login-invisible" id="login" >Login here</Link>
                 </form>
             </div>
         )
