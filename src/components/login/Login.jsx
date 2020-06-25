@@ -9,8 +9,10 @@ class Login extends Component{
         var credential = {[user] : password};
         console.log(credential);
 
-        if (localStorage.getItem(user) === password) {
+        if (JSON.parse(localStorage.getItem(user)).password === password) {
             alert("Login successful!");
+            localStorage.setItem("loggedUser", user);
+            window.location.pathname="/";
         } else {
             alert("Invalid login! Please try again.");
         }
