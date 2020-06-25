@@ -5,8 +5,37 @@
 
 .user-placeholder{
     float: right;
-    margin: 20px;
     font-size: 20px;
+    margin-right: 20px;
+}
+
+.user{
+    display: block;
+    background-color: #3498DB;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.user:hover{
+    background-color: #2980B9;
+    cursor: pointer;
+}
+
+.signout {
+    display: none;
+    background-color: #3498DB;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.signout:hover{
+    cursor: pointer;
+}
+
+.signout:hover{
+    background-color: #2980B9
 }
 
 .todos-wrapper {
