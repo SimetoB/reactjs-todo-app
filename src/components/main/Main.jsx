@@ -75,6 +75,8 @@ class Main extends Component{
             changeStatus(e)
         } else if (e.target.dataset.action === "delete") {
             deleteTodo(e);
+        } else {
+            return;
         }
 
         function changeStatus(e) {
@@ -94,12 +96,17 @@ class Main extends Component{
 
         function deleteTodo(e) {
             var userJSON = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
+            var curTask = e.target.dataset.task;
+
+            delete userJSON.tasks[curTask];
+
+            var userData = JSON.stringify(userJSON);
+
+            localStorage.setItem(localStorage.getItem("loggedUser"), userData);
         }
-        
+
         window.location.reload();
     }
-
-
 
     render() {
         return (
