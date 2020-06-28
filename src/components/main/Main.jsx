@@ -55,8 +55,8 @@ class Main extends Component{
         var desc = document.getElementById("desc").value;
         var time = document.getElementById("time").value;
 
-        // Fix this later
-        var newTodo = JSON.stringify({"title": title, "desc" : desc, "time": time, "active" : 1});
+        // Generate new todo object
+        var newTodo = {"title": title, "desc" : desc, "time": time, "active" : 1};
         var userJSON = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
         var i = 1;
 
@@ -64,9 +64,9 @@ class Main extends Component{
             i++;
         }
 
-        userJSON.tasks["task" + i] = {"title" : title, "desc" : desc, "time": time};
-        var userData = JSON.stringify(userJSON);
+        userJSON.tasks["task" + i] = newTodo;
 
+        var userData = JSON.stringify(userJSON);
         localStorage.setItem(localStorage.getItem("loggedUser"), userData);
     }
 
@@ -90,7 +90,6 @@ class Main extends Component{
             }
 
             var userData = JSON.stringify(userJSON);
-
             localStorage.setItem(localStorage.getItem("loggedUser"), userData);
         }
 
@@ -101,7 +100,6 @@ class Main extends Component{
             delete userJSON.tasks[curTask];
 
             var userData = JSON.stringify(userJSON);
-
             localStorage.setItem(localStorage.getItem("loggedUser"), userData);
         }
 
