@@ -26,12 +26,12 @@ class Main extends Component{
                                                             <span class=\"desc\">" + curTasks[i].desc + "</span> \
                                                             <span class=\"time\">" + curTasks[i].time + "</span> \
                                                         </li> \
-                                                        <span class=\"checkmark\" title=\"Mark done\" data-task=\"" + i + "\">&#10004;</span> \
-                                                        <span class=\"delete\" title=\"Delete\">&#10060;</span>";
-
+                                                        <span class=\"checkmark\" title=\"Mark done\" data-task=\"" + i + "\" data-action=\"complete\">&#10004;</span> \
+                                                        <span class=\"delete\" title=\"Delete\" data-task=\"" + i + "\"  data-action=\"delete\">&#10060;</span>";
+            // Add styling if the task is not active
             if (curTasks[i].active == 0) {
                 document.getElementById(i).style.opacity = 0.5;
-                document.getElementById(i).style.border = "1px solid black";
+                document.getElementById(i).style.border = "1px solid green";
             }
         }
 
@@ -55,6 +55,7 @@ class Main extends Component{
         var desc = document.getElementById("desc").value;
         var time = document.getElementById("time").value;
 
+        // Fix this later
         var newTodo = JSON.stringify({"title": title, "desc" : desc, "time": time, "active" : 1});
         var userJSON = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
         var i = 1;
@@ -70,13 +71,35 @@ class Main extends Component{
     }
 
     todoButtonClicked(e) {
+        if (e.target.dataset.action === "complete") {
+            changeStatus(e)
+        } else if (e.target.dataset.action === "delete") {
+            deleteTodo(e);
+        }
 
+        function changeStatus(e) {
+            var userJSON = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
+            var curTask = e.target.dataset.task;
+
+            if (userJSON.tasks[curTask].active === 1) {
+                userJSON.tasks[curTask].active = 0;
+            } else {
+                userJSON.tasks[curTask].active = 1;
+            }
+
+            var userData = JSON.stringify(userJSON);
+
+            localStorage.setItem(localStorage.getItem("loggedUser"), userData);
+        }
+
+        function deleteTodo(e) {
+            var userJSON = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
+        }
+        
+        window.location.reload();
     }
 
-    changeStatus(e) {
-        var userJSON = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
 
-    }
 
     render() {
         return (
