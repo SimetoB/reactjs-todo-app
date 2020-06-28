@@ -17,7 +17,7 @@ class Register extends Component{
                 "password": password,
                 "tasks": {}
              };
-             
+
             localStorage.setItem([user], JSON.stringify(data));
             alert(`You've successfully registered as the user ${user}, please proceed to the login page.`);
             document.getElementById("login").className="login-visible";

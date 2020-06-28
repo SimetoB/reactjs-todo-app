@@ -11,6 +11,30 @@ class Main extends Component{
         } else {
             document.getElementById("user").innerHTML = loggedUser;
         }
+
+        this.renderTodos();
+    }
+
+    renderTodos (){
+        // Get all tasks for logged user in JSON format
+        var curTasks = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser"))).tasks;
+
+        // Render each tasks from the JSON into the ul list
+        for (var i in curTasks) {
+            document.getElementById("todos").innerHTML += "<li class=\"todo\" id=\"" + i + "\"> \
+                                                            <span class=\"todo-title\">" + curTasks[i].title + "</span> \
+                                                            <span class=\"desc\">" + curTasks[i].desc + "</span> \
+                                                            <span class=\"time\">" + curTasks[i].time + "</span> \
+                                                        </li> \
+                                                        <span class=\"checkmark\" title=\"Mark done\" data-task=\"" + i + "\">&#10004;</span> \
+                                                        <span class=\"delete\" title=\"Delete\">&#10060;</span>";
+
+            if (curTasks[i].active == 0) {
+                document.getElementById(i).style.opacity = 0.5;
+                document.getElementById(i).style.border = "1px solid black";
+            }
+        }
+
     }
 
     dropdownClicked(){
@@ -31,18 +55,27 @@ class Main extends Component{
         var desc = document.getElementById("desc").value;
         var time = document.getElementById("time").value;
 
-        var newTodo = JSON.stringify({"title": title, "desc" : desc, "time": time});
-        var userJson = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
+        var newTodo = JSON.stringify({"title": title, "desc" : desc, "time": time, "active" : 1});
+        var userJSON = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
         var i = 1;
 
-        while (userJson.tasks["task" + i] !== undefined) {
+        while (userJSON.tasks["task" + i] !== undefined) {
             i++;
         }
 
-        userJson.tasks["task" + i] = {"title" : title, "desc" : desc, "time": time};
-        var userData = JSON.stringify(userJson);
+        userJSON.tasks["task" + i] = {"title" : title, "desc" : desc, "time": time};
+        var userData = JSON.stringify(userJSON);
 
         localStorage.setItem(localStorage.getItem("loggedUser"), userData);
+    }
+
+    todoButtonClicked(e) {
+
+    }
+
+    changeStatus(e) {
+        var userJSON = JSON.parse(localStorage.getItem(localStorage.getItem("loggedUser")));
+
     }
 
     render() {
@@ -67,7 +100,7 @@ class Main extends Component{
                     </form>
 
                     <p class="sub-title">My todos:</p>
-                    <ul class="todos" id="todos"></ul>
+                    <ul class="todos" id="todos" onClick={this.todoButtonClicked}></ul>
                 </main>
             </div>
         )

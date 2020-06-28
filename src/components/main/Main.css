@@ -53,7 +53,7 @@
 
 .add-todo-form {
     margin: 100px auto 0 auto;
-    width: 60%;
+    width: 50%;
 }
 
 .new-todo-input {
@@ -79,7 +79,7 @@
 
 .todos {
     width: 60%;
-    margin-top: 100px;
+    margin: 50px auto 0 auto;
 }
 
 .todo {
@@ -88,4 +88,52 @@
     margin: 10px;
     background-color: #eeeeee;
     border-radius: 10px;
+    position: static;
+}
+
+.todo-title {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    margin: 10px 0;
+    word-break: break-all;
+}
+
+.desc {
+    width: 80%;
+    display: inline-block;
+    word-break: break-all;
+}
+
+.time {
+    width: 20%;
+    display: inline-block;
+    float: right;
+    text-align: right;
+}
+
+.checkmark {
+    position: relative;
+    right: 25px;
+    bottom: 75px;
+    font-size: 20px;
+    cursor: pointer;
+}
+/*
+.pen {
+    position: relative;
+    bottom: 100px;
+    left: 99%;
+    font-size: 20px;
+    cursor: pointer;
+} */
+
+.delete {
+    position: relative;
+    bottom: 75px;
+    left: 98%;
+    font-size: 20px;
+    cursor: pointer;
 }
